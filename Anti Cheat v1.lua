@@ -257,7 +257,7 @@ CloseButotn.MouseButton1Click:Connect(function()
 	ANIMFRAME:TweenPosition(UDim2.new(1.015,0,-0.137,0), Enum.EasingDirection.Out, Enum.EasingStyle.Quad, .1, true)
 	wait(.1)
 	wait(.1)
-Main:Destroy()
+	Main:Destroy()
 	ANIMFRAME:Destroy()
 end) -- In case errors.
 
@@ -830,7 +830,7 @@ function library:AddWindow(Text,Image)
 		Text=Text or "Not Defined"
 		local TEMPLATESECTION = Instance.new("Frame")
 		local UICorner = Instance.new("UICorner")
-		local SECTIONTITLE = Instance.new("TextLabel")
+
 		local THINGTHATGOESINSIDE = Instance.new("Frame")
 		local UIListLayout2 = Instance.new("UIListLayout")
 
@@ -840,21 +840,23 @@ function library:AddWindow(Text,Image)
 		TEMPLATESECTION.BorderSizePixel = 0
 		TEMPLATESECTION.Position = UDim2.new(0.0549450554, 0, 0, 0)
 		TEMPLATESECTION.Size = UDim2.new(0, 243, 0, 69)
-		
+
 		UICorner.Parent = TEMPLATESECTION
 
-		SECTIONTITLE.Name = Text
+
+		local SECTIONTITLE = Instance.new("TextLabel")
+
+		SECTIONTITLE.Name = "SECTIONTITLE"
 		SECTIONTITLE.Parent = TEMPLATESECTION
 		SECTIONTITLE.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 		SECTIONTITLE.BackgroundTransparency = 1.000
 		SECTIONTITLE.BorderSizePixel = 0
-		SECTIONTITLE.Position = UDim2.new(0, 12, 0, -13)
-		SECTIONTITLE.Size = UDim2.new(0, 117, 0, 23)
+		SECTIONTITLE.Position = UDim2.new(0, 8, 0, 0)
+		SECTIONTITLE.Size = UDim2.new(0, 209, 0, 23)
 		SECTIONTITLE.Font = Enum.Font.SourceSansSemibold
 		SECTIONTITLE.Text = Text
 		SECTIONTITLE.TextColor3 = Color3.fromRGB(255, 255, 255)
 		SECTIONTITLE.TextSize = 16.000
-		SECTIONTITLE.TextXAlignment = Enum.TextXAlignment.Left
 
 		THINGTHATGOESINSIDE.Name = "THINGTHATGOESINSIDE"
 		THINGTHATGOESINSIDE.Parent = TEMPLATESECTION
@@ -863,7 +865,20 @@ function library:AddWindow(Text,Image)
 		THINGTHATGOESINSIDE.BorderSizePixel = 0
 		THINGTHATGOESINSIDE.Position = UDim2.new(0, 8, 0, 10)
 		THINGTHATGOESINSIDE.Size = UDim2.new(0.94599998, 0, 0.75999999, 0)
+		-- Gui to Lua
+		-- Version: 3.2
 
+		-- Instances:
+
+		local DFHSASDAHy = Instance.new("UIListLayout")
+
+		--Properties:
+		--0,243,0,21
+		DFHSASDAHy.Parent = TEMPLATESECTION
+		DFHSASDAHy.HorizontalAlignment = Enum.HorizontalAlignment.Center
+		DFHSASDAHy.SortOrder = Enum.SortOrder.LayoutOrder
+
+		--
 		UIListLayout2.Parent = THINGTHATGOESINSIDE
 		UIListLayout2.HorizontalAlignment = Enum.HorizontalAlignment.Center
 		UIListLayout2.SortOrder = Enum.SortOrder.LayoutOrder
@@ -941,7 +956,7 @@ function library:AddWindow(Text,Image)
 			PERCENTAGE.TextSize = 16.000
 			PERCENTAGE.TextXAlignment = Enum.TextXAlignment.Right
 
-			TEMPLATESECTION.Size = UDim2.fromOffset(TEMPLATESECTION.AbsoluteSize.X,  UIListLayout2.AbsoluteContentSize.Y + 21)
+			TEMPLATESECTION.Size = UDim2.fromOffset(TEMPLATESECTION.AbsoluteSize.X,  UIListLayout2.AbsoluteContentSize.Y + 21+20)
 			TEMPLATEWINDOW.CanvasSize =UDim2.new(0,0,0, UIListLayout.AbsoluteContentSize.Y + 21)
 
 			SliderButton.MouseButton1Down:Connect(function()
@@ -1003,28 +1018,28 @@ function library:AddWindow(Text,Image)
 			UICorner1.CornerRadius = UDim.new(0, 5)
 			UICorner1.Parent = TEMPLATEBUTTON
 			AddRipple(TEMPLATEBUTTON);
-			TEMPLATESECTION.Size = UDim2.fromOffset(TEMPLATESECTION.AbsoluteSize.X,  UIListLayout2.AbsoluteContentSize.Y + 21)
+			TEMPLATESECTION.Size = UDim2.fromOffset(TEMPLATESECTION.AbsoluteSize.X,  UIListLayout2.AbsoluteContentSize.Y + 21+20)
 			TEMPLATEWINDOW.CanvasSize =UDim2.new(0,0,0, UIListLayout.AbsoluteContentSize.Y + 21)
 			TEMPLATEBUTTON.MouseButton1Click:Connect(function()
 				pcall(function()
 					Action()
 				end)
 			end)
-			TEMPLATESECTION.Size = UDim2.fromOffset(TEMPLATESECTION.AbsoluteSize.X,  UIListLayout2.AbsoluteContentSize.Y + 21)
+			TEMPLATESECTION.Size = UDim2.fromOffset(TEMPLATESECTION.AbsoluteSize.X,  UIListLayout2.AbsoluteContentSize.Y + 21+20)
 			TEMPLATEWINDOW.CanvasSize =UDim2.new(0,0,0, UIListLayout.AbsoluteContentSize.Y + 21)
 		end
-		
+
 		function Insiders:AddKeybind(Text, KeyCode, Action)
 			Text=Text or ". . ."
 			Action=Action or function() end
 			KeyCode=KeyCode or Enum.KeyCode.RightAlt
-			
+
 			local KeyBind = Instance.new("Frame")
 			local g4 = Instance.new("UICorner")
 			local title = Instance.new("TextLabel")
 			local KeyButton = Instance.new("TextButton")
 			local h5 = Instance.new("UICorner")
-			
+
 			KeyBind.Name = Text.."_KeyBind"
 			KeyBind.Parent = THINGTHATGOESINSIDE
 			KeyBind.BackgroundColor3 = Color3.fromRGB(31, 31, 31)
@@ -1065,10 +1080,10 @@ function library:AddWindow(Text,Image)
 			h5.CornerRadius = UDim.new(0, 5)
 			h5.Name = "h5"
 			h5.Parent = KeyButton
-			
-			TEMPLATESECTION.Size = UDim2.fromOffset(TEMPLATESECTION.AbsoluteSize.X,  UIListLayout2.AbsoluteContentSize.Y + 21)
+
+			TEMPLATESECTION.Size = UDim2.fromOffset(TEMPLATESECTION.AbsoluteSize.X,  UIListLayout2.AbsoluteContentSize.Y + 21+20)
 			TEMPLATEWINDOW.CanvasSize =UDim2.new(0,0,0, UIListLayout.AbsoluteContentSize.Y + 21)
-			
+
 			game:GetService("UserInputService").InputBegan:connect(function(a, gp) 
 				if not gp then 
 					if a.KeyCode.Name == KeyCode then 
@@ -1078,7 +1093,7 @@ function library:AddWindow(Text,Image)
 					end
 				end
 			end)
-			
+
 			KeyButton.MouseButton1Click:connect(function() 
 				game.TweenService:Create(KeyButton, TweenInfo.new(0.1, Enum.EasingStyle.Linear, Enum.EasingDirection.In), {
 					BackgroundColor3 = Color3.fromRGB(45, 45, 45)
@@ -1096,13 +1111,13 @@ function library:AddWindow(Text,Image)
 
 
 		end
-		
+
 		function Insiders:AddTextBox(Text, PlaceHolder, ClearOnFocus,Action)
 			PlaceHolder=PlaceHolder or "Text Here"
 			Action = Action or function() end
 			Text = Text or "Nil Thing"
 			ClearOnFocus = ClearOnFocus or false
-			
+
 			local TEMPLATETextBox = Instance.new("TextBox")
 			local UICorner = Instance.new("UICorner")
 
@@ -1123,8 +1138,9 @@ function library:AddWindow(Text,Image)
 
 			UICorner.CornerRadius = UDim.new(0, 5)
 			UICorner.Parent = TEMPLATETextBox
-			TEMPLATESECTION.Size = UDim2.fromOffset(TEMPLATESECTION.AbsoluteSize.X,  UIListLayout2.AbsoluteContentSize.Y + 21)
-			TEMPLATEWINDOW.CanvasSize =UDim2.new(0,0,0, UIListLayout.AbsoluteContentSize.Y + 21)
+			TEMPLATESECTION.Size = UDim2.fromOffset(TEMPLATESECTION.AbsoluteSize.X,  UIListLayout2.AbsoluteContentSize.Y + 21+20)
+			TweenService:Create(TEMPLATEWINDOW, TweenInfo.new(0.1, Enum.EasingStyle.Sine, Enum.EasingDirection.InOut), {CanvasSize = UDim2.new(0,0,0, UIListLayout.AbsoluteContentSize.Y + 21)}):Play()	
+
 			local function UPDT()
 				pcall(function()
 					Action(TEMPLATETextBox.Text)
@@ -1132,14 +1148,14 @@ function library:AddWindow(Text,Image)
 			end
 			TEMPLATETextBox.Changed:Connect(UPDT)
 		end
-		
+
 		function Insiders:AddDropDown(Text,Table,Action)
 			Text = Text or "Nil dropdown"
 			Table = Table or {"Nil Option 1", "Nil Option 2", "Nil Option 3"}
 			Action = Action or function() end
 			local Selected;
 			local IsDown = false;
-			
+
 			local DROPDOWN = Instance.new("Frame")
 			local j7 = Instance.new("UICorner")
 			local LIST = Instance.new("UIListLayout")
@@ -1157,7 +1173,7 @@ function library:AddWindow(Text,Image)
 			DROPDOWN.Position = UDim2.new(0.028010359, 0, 0.723897219, 0)
 			DROPDOWN.Size = UDim2.new(0,217,0,27)
 			DROPDOWN.ClipsDescendants = true
-			
+
 			j7.CornerRadius = UDim.new(0, 5)
 			j7.Name = "j7"
 			j7.Parent = DROPDOWN
@@ -1191,7 +1207,7 @@ function library:AddWindow(Text,Image)
 			Title.Position = UDim2.new(0.0363636352, 0, 0.100000001, 0)
 			Title.Size = UDim2.new(0, 155, 0, 17)
 			Title.Font = Enum.Font.SourceSansSemibold
-			Title.Text = "Nil Dropdown"
+			Title.Text = Text
 			Title.TextColor3 = Color3.fromRGB(255, 255, 255)
 			Title.TextSize = 16.000
 			Title.TextXAlignment = Enum.TextXAlignment.Left
@@ -1207,12 +1223,12 @@ function library:AddWindow(Text,Image)
 			ROTATIONTHENG.Text = "+"
 			ROTATIONTHENG.TextColor3 = Color3.fromRGB(134, 134, 134)
 			ROTATIONTHENG.TextSize = 19.000
-			
+
 			for i,v in pairs(Table) do
 				local OPTINOS = Instance.new("TextButton")
 				local UICorner_2 = Instance.new("UICorner")
 				local SecTitle = Instance.new("TextLabel")
-				
+
 				OPTINOS.Name = "OPTINOS"
 				OPTINOS.Parent = DROPDOWN
 				OPTINOS.BackgroundColor3 = Color3.fromRGB(44, 44, 44)
@@ -1241,15 +1257,16 @@ function library:AddWindow(Text,Image)
 				SecTitle.TextColor3 = Color3.fromRGB(255, 255, 255)
 				SecTitle.TextSize = 16.000
 				SecTitle.TextXAlignment = Enum.TextXAlignment.Left
-				
+
 				AddRipple(OPTINOS)
 				OPTINOS.MouseButton1Click:Connect(function()
 					Selected = v;
 					DROPDOWN:TweenSize(UDim2.new(0,217,0,27), Enum.EasingDirection.Out, Enum.EasingStyle.Quad, 0.2, true)
 					wait(.2)
-					TEMPLATESECTION:TweenSize(UDim2.fromOffset(TEMPLATESECTION.AbsoluteSize.X,  UIListLayout2.AbsoluteContentSize.Y + 21),Enum.EasingDirection.Out, Enum.EasingStyle.Quad, 0.2, true) 
+					TEMPLATESECTION:TweenSize(UDim2.fromOffset(TEMPLATESECTION.AbsoluteSize.X,  UIListLayout2.AbsoluteContentSize.Y + 21+20),Enum.EasingDirection.Out, Enum.EasingStyle.Quad, 0.2, true) 
 					wait(.2)
-					TEMPLATEWINDOW.CanvasSize =UDim2.new(0,0,0, UIListLayout.AbsoluteContentSize.Y + 21)					
+					TweenService:Create(TEMPLATEWINDOW, TweenInfo.new(0.1, Enum.EasingStyle.Sine, Enum.EasingDirection.InOut), {CanvasSize = UDim2.new(0,0,0, UIListLayout.AbsoluteContentSize.Y + 21)}):Play()	
+
 					IsDown =  false
 					for i,v in pairs(DROPDOWN:GetChildren()) do
 						if v:IsA("TextButton") or v:IsA("GuiButton") then
@@ -1258,21 +1275,23 @@ function library:AddWindow(Text,Image)
 							end
 						end
 					end
+					TEMPLATESECTION:TweenSize(UDim2.fromOffset(TEMPLATESECTION.AbsoluteSize.X,  UIListLayout2.AbsoluteContentSize.Y + 21+20),Enum.EasingDirection.Out, Enum.EasingStyle.Quad, 0.2, true) 
+
 					TweenService:Create(OPTINOS, TweenInfo.new(0.3, Enum.EasingStyle.Sine, Enum.EasingDirection.InOut), {BackgroundColor3 = Color3.fromRGB(27, 27, 27)}):Play()	
 					pcall(function()
 						Action(Selected)
 					end)
 				end)
-				
+
 			end
-			
+
 			AddRipple(INSIDEBUTTON)
 			INSIDEBUTTON.MouseButton1Click:Connect(function()
 				if IsDown == false then
 					DROPDOWN:TweenSize(UDim2.fromOffset(DROPDOWN.AbsoluteSize.X,  LIST.AbsoluteContentSize.Y + 4), Enum.EasingDirection.Out, Enum.EasingStyle.Quad, 0.2, true)
 					TEMPLATESECTION.ClipsDescendants = true
 					wait(.2)
-					TEMPLATESECTION:TweenSize(UDim2.fromOffset(TEMPLATESECTION.AbsoluteSize.X,  UIListLayout2.AbsoluteContentSize.Y + 21), Enum.EasingDirection.Out, Enum.EasingStyle.Quad, 0.2, true) 
+					TEMPLATESECTION:TweenSize(UDim2.fromOffset(TEMPLATESECTION.AbsoluteSize.X,  UIListLayout2.AbsoluteContentSize.Y + 21+20), Enum.EasingDirection.Out, Enum.EasingStyle.Quad, 0.2, true) 
 
 					wait(.2)
 					TEMPLATESECTION.ClipsDescendants = false
@@ -1282,14 +1301,15 @@ function library:AddWindow(Text,Image)
 				else
 					DROPDOWN:TweenSize(UDim2.new(0,217,0,27), Enum.EasingDirection.Out, Enum.EasingStyle.Quad, 0.2, true)
 					wait(.2)
-					TEMPLATESECTION:TweenSize(UDim2.fromOffset(TEMPLATESECTION.AbsoluteSize.X,  UIListLayout2.AbsoluteContentSize.Y + 21),Enum.EasingDirection.Out, Enum.EasingStyle.Quad, 0.2, true) 
+					TEMPLATESECTION:TweenSize(UDim2.fromOffset(TEMPLATESECTION.AbsoluteSize.X,  UIListLayout2.AbsoluteContentSize.Y + 21+20),Enum.EasingDirection.Out, Enum.EasingStyle.Quad, 0.2, true) 
 					wait(.2)
-					TEMPLATEWINDOW.CanvasSize =UDim2.new(0,0,0, UIListLayout.AbsoluteContentSize.Y + 21)
+					TweenService:Create(TEMPLATEWINDOW, TweenInfo.new(0.1, Enum.EasingStyle.Sine, Enum.EasingDirection.InOut), {CanvasSize = UDim2.new(0,0,0, UIListLayout.AbsoluteContentSize.Y + 21)}):Play()	
+
 					IsDown =  false;
 				end
 			end)
 		end
-		
+
 		function Insiders:AddToggle(Text,Value,Action)
 			Text = Text or "Nil Toggle"
 			Action =Action or function() end
@@ -1348,7 +1368,7 @@ function library:AddWindow(Text,Image)
 			end)
 
 
-			TEMPLATESECTION.Size = UDim2.fromOffset(TEMPLATESECTION.AbsoluteSize.X,  UIListLayout2.AbsoluteContentSize.Y + 21)
+			TEMPLATESECTION.Size = UDim2.fromOffset(TEMPLATESECTION.AbsoluteSize.X,  UIListLayout2.AbsoluteContentSize.Y + 21+20)
 			TEMPLATEWINDOW.CanvasSize =UDim2.new(0,0,0, UIListLayout.AbsoluteContentSize.Y + 21)
 		end
 		return Insiders
@@ -1356,7 +1376,6 @@ function library:AddWindow(Text,Image)
 	return Intern
 end
 
---_== ADDING FUNCTIONS ==_--
 AddRipple(CloseButotn)
 dragify(ShadowOfMainLibraryOkMADAHJFDGSUHJADFG)
 
@@ -1367,7 +1386,8 @@ local options = {
 	FOV = 0;
 	UsingFOV = false;
 	DrawFOV = false;
-	FOVColor = Color3.fromRGB(255, 255, 255)
+	FOVColor = Color3.fromRGB(255, 255, 255);
+	AimPart = "Head"
 }
 
 local dwCamera = workspace.CurrentCamera
@@ -1460,20 +1480,18 @@ setreadonly(mt, false)
 mt.__namecall = newcclosure(function(obj,...)
 	local args = {...}
 	if getnamecallmethod() == "FireServer" and tostring(obj) == "Rev" then
-		local Target = ClosestPlayerToMouse()
-		local char_part_pos, is_onscreen = dwCamera:WorldToViewportPoint(plrs[tostring(Target)].Character.HumanoidRootPart.Position)
-		local mag = (Vector2.new(dwMouse.X, dwMouse.Y) - Vector2.new(char_part_pos.X, char_part_pos.Y)).Magnitude
+		if options.SilentAim then
+			local Target = ClosestPlayerToMouse()
+			local char_part_pos, is_onscreen = dwCamera:WorldToViewportPoint(plrs[tostring(Target)].Character[options.AimPart].Position)
+			local mag = (Vector2.new(dwMouse.X, dwMouse.Y) - Vector2.new(char_part_pos.X, char_part_pos.Y)).Magnitude
 
-		if notBehindWall(plrs[tostring(Target)].Character.HumanoidRootPart) and options.SilentAim then
-			if options.UsingFOV then
-				if mag <= options.FOV then
-					args[1] = plrs[tostring(Target)].Character.Head.Position
-					return obj.FireServer(obj, unpack(args))
+			if notBehindWall(plrs[tostring(Target)].Character.HumanoidRootPart) then
+				if options.UsingFOV then
+					if mag <= options.FOV then
+						args[1] = plrs[tostring(Target)].Character[options.AimPart].Position
+					end
 				end
-				return old(obj, ... )
 			end
-			args[1] = plrs[tostring(Target)].Character.Head.Position
-			return obj.FireServer(obj, unpack(args))
 		end
 		return obj.FireServer(obj, unpack(args))
 	end
@@ -1486,12 +1504,14 @@ AimWindow:AddBlank()
 
 local SA  = AimWindow:AddSection("Silent Aim")
 SA:AddButton("Get Revolver", function()
-	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame=game:GetService("Workspace").Asset["[Revolver] - $1200"].Head.CFrame
+	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame=game:GetService("Workspace").Buyer["[Revolver] - $1300"].Head.CFrame
 end)
 SA:AddToggle("Silent Aim", false, function(v)
 	options.SilentAim = v;
 end)
-
+SA:AddDropDown("Aim Part", {"Head","HumanoidRootPart","LowerTorso","UpperTorso"}, function(v)
+	options.AimPart = v
+end)
 SA:AddToggle("Using FOV", false, function(v)
 	options.UsingFOV = v;
 	UpdateFov()
@@ -1513,46 +1533,18 @@ local Teleports = library:AddWindow("Go To",4799887091)
 Teleports:AddBlank();
 
 local s1=Teleports:AddSection("Guns")
-s1:AddButton("[RPG] - $25000", function()
-	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame=game:GetService("Workspace").Asset["[RPG] - $25000"].Head.CFrame
+
+s1:AddButton("[SECRET ZONE]", function()
+	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame=workspace["[AK47] - $2300"].Head.CFrame
 end)
 
-s1:AddButton("[Tactical Shotgun] - $1800", function()
-	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame=game:GetService("Workspace").Asset["[Tactical Shotgun] - $1800"].Head.CFrame
-end)
-
-s1:AddButton("[Silencer] - $550", function()
-	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame=game:GetService("Workspace").Asset["[Silencer] - $550"].Head.CFrame
-end)
-
-s1:AddButton("[SMG] - $750", function()
-	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame=game:GetService("Workspace").Asset["[SMG] - $750"].Head.CFrame
-end)
-
-s1:AddButton("[Revolver] - $1200", function()
-	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame=game:GetService("Workspace").Asset["[Revolver] - $1200"].Head.CFrame
-end)
-
-s1:AddButton("[Money Gun] - $300", function()
-	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame=game:GetService("Workspace").Asset["[Money Gun] - $300"].Head.CFrame
-end)
-
-s1:AddButton("[LMG] - $3500", function()
-	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame=game:GetService("Workspace").Asset["[LMG] - $3500"].Head.CFrame
-end)
-
-s1:AddButton("Double Barrel SG] - $1800", function()
-	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame=game:GetService("Workspace").Asset["[Double Barrel SG] - $1800"].Head.CFrame
-end)
-
-s1:AddButton("[Deagle Giver] - 59", function()
-	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame=game:GetService("Workspace").Asset["[Deagle Giver] - 59 Damage and Might be broken"].Head.CFrame
-end)
-
-s1:AddButton("[Minigun] - $500000", function()
-	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame=game:GetService("Workspace").Asset["[Minigun] - $500000"].Head.CFrame
-end)
-
+for i,v in pairs(workspace.Buyer:GetChildren()) do
+	if v.Name ~= "[ComingSoon] - N/A" then 
+		s1:AddButton(v.Name, function()
+			game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame=v.Head.CFrame
+		end)
+	end
+end
 
 local ScriptsTab = library:AddWindow("Scripts",5650870628)
 ScriptsTab:AddBlank()
