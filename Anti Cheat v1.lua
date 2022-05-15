@@ -263,7 +263,8 @@ end) -- In case errors.
 
 
 
-function AddRipple(button)
+function AddRipple(button, Sidebar, Icon)
+	--http://www.roblox.com/asset/?id=6683814312
 	local obj = button
 	button.ClipsDescendants = true
 	local function Ripple()
@@ -276,7 +277,13 @@ function AddRipple(button)
 				Circle.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 				Circle.BackgroundTransparency = 1.000
 				Circle.ZIndex = 10
-				Circle.Image = "rbxassetid://266543268"
+				
+				if Icon ~= nil then
+					Circle.Image = "rbxassetid://" .. Icon
+				else
+					Circle.Image = "rbxassetid://266543268"
+				end --2288843827
+				
 				Circle.ImageColor3 = Color3.fromRGB(211, 211, 211)
 				Circle.ImageTransparency = 0.6
 				local NewX, NewY = Mouse.X - Circle.AbsolutePosition.X, Mouse.Y - Circle.AbsolutePosition.Y
@@ -341,7 +348,9 @@ function AddRipple(button)
 
 	local function OnMouseEnter()
 		hovering = true
-
+		if Sidebar then
+			TweenService:Create(button.IMAGE , TweenInfo.new(0.2, Enum.EasingStyle.Sine, Enum.EasingDirection.InOut), {Rotation = -20}):Play()	
+		end
 		local backgroundFadeIn = TweenService:Create(background, tweenInfo, { BackgroundTransparency = 0.95 })
 
 		backgroundFadeIn:Play()
@@ -358,6 +367,9 @@ function AddRipple(button)
 	local function OnMouseLeave()
 		hovering = false
 		active = false
+		if Sidebar then
+			TweenService:Create(button.IMAGE , TweenInfo.new(0.2, Enum.EasingStyle.Sine, Enum.EasingDirection.InOut), {Rotation = 0}):Play()	
+		end
 	end
 	button.MouseButton1Down:Connect(OnMouseButton1Down)
 	button.MouseButton1Up:Connect(OnMouseButton1Up)
@@ -481,7 +493,7 @@ function library:AddWindow(Text,Image)
 		TweenService:Create(TEMPLATEWINDOW, TweenInfo.new(0.3, Enum.EasingStyle.Sine, Enum.EasingDirection.InOut), {ScrollBarImageTransparency = 1}):Play()	
 	end)
 
-	AddRipple(GunTemplate)
+	AddRipple(GunTemplate,true)
 	GunTemplate.MouseButton1Click:Connect(function()
 		for i,v in pairs(WINDOWCONTEINER:GetChildren()) do
 
@@ -707,7 +719,8 @@ function library:AddWindow(Text,Image)
 					wait(.5)
 					WAIT = true
 				end
-				TEMPLATEWINDOW.CanvasSize =UDim2.new(0,0,0, UIListLayout.AbsoluteContentSize.Y + 21)
+                TweenService:Create(TEMPLATEWINDOW, TweenInfo.new(0.2, Enum.EasingStyle.Sine, Enum.EasingDirection.InOut), {CanvasSize = UDim2.new(0,0,0, UIListLayout.AbsoluteContentSize.Y + 21)}):Play()	
+
 			end
 		end)
 
@@ -725,7 +738,7 @@ function library:AddWindow(Text,Image)
 					wait(.5)
 					WAIT = true
 				end
-				TEMPLATEWINDOW.CanvasSize =UDim2.new(0,0,0, UIListLayout.AbsoluteContentSize.Y + 21)
+                TweenService:Create(TEMPLATEWINDOW, TweenInfo.new(0.2, Enum.EasingStyle.Sine, Enum.EasingDirection.InOut), {CanvasSize = UDim2.new(0,0,0, UIListLayout.AbsoluteContentSize.Y + 21)}):Play()	
 			end
 		end)
 		local uis = game:GetService("UserInputService")
@@ -805,6 +818,7 @@ function library:AddWindow(Text,Image)
 						DarknessPicker.AbsoluteSize.Y)
 				)	
 			end
+
 			updateColour(centreOfWheel)
 			pcall(function()
 				Action(ColourDisplayBIG.ImageColor3)
@@ -1387,7 +1401,8 @@ local options = {
 	UsingFOV = false;
 	DrawFOV = false;
 	FOVColor = Color3.fromRGB(255, 255, 255);
-	AimPart = "Head"
+	AimPart = "Head";
+    Autofarming = false;
 }
 
 local dwCamera = workspace.CurrentCamera
@@ -1571,8 +1586,26 @@ SavedScripts:AddButton("Crash Server (by Demonioxxx)", function()
 	end
 end)
 
+local AF = ScriptsTab:AddSection("Autofarm");
+local RunService = game:GetService("RunService")
+options.Autofarming = false
+RunService.RenderStepped:Connect(function()
+    if options.Autofarming == true then
+        wait()
+        for i,v in pairs(workspace.Cashier:GetChildren()) do
+			if v.Screen.BrickColor ~= BrickColor.new("Really red") and fireproximityprompt then
+				game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.Open.CFrame
+				fireproximityprompt(v.Hitbox.ProximityPrompt)
+				wait(1.5)
+				fireproximityprompt(v.Hitbox.ProximityPrompt)
+			end
+		end
+    end
+end)
 
-
+AF:AddToggle("Use Autofarm", false, function(v)
+    options.Autofarming = v
+end)
 --[[
 local PTAB = library:AddWindow("Player",7992557358)
 PTAB:AddBlank()
