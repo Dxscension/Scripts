@@ -1403,6 +1403,8 @@ local options = {
 	FOVColor = Color3.fromRGB(255, 255, 255);
 	AimPart = "Head";
     Autofarming = false;
+    WalkSpeed = 16;
+    JumpPower = 50;
 }
 
 local dwCamera = workspace.CurrentCamera
@@ -1490,6 +1492,8 @@ end
 
 local mt = getrawmetatable(game)
 local old = mt.__namecall
+local oldIndex = mt.__Index
+
 setreadonly(mt, false)
 
 mt.__namecall = newcclosure(function(obj,...)
@@ -1512,7 +1516,15 @@ mt.__namecall = newcclosure(function(obj,...)
 	end
 	return old(obj, ... )
 end)
-
+mt.__Index = newcclosure(function(self,b)
+    if b == "WalkSpeed" then
+        return 16
+    end
+    if b == "JumpPower" then
+        return 50
+    end
+	return oldIndex(self,b)
+end)
 local AimWindow=library:AddWindow("Aim",3319681178)
 
 AimWindow:AddBlank()
@@ -1586,7 +1598,7 @@ SavedScripts:AddButton("Crash Server (by Demonioxxx)", function()
 	end
 end)
 
-local AF = ScriptsTab:AddSection("Autofarm");
+local AF = ScriptsTab:AddSection("Local Player");
 local RunService = game:GetService("RunService")
 options.Autofarming = false
 RunService.RenderStepped:Connect(function()
@@ -1606,6 +1618,16 @@ end)
 AF:AddToggle("Use Autofarm", false, function(v)
     options.Autofarming = v
 end)
+
+AF:AddSlider("WalkSpeed", 16, 350, 16, function(v)
+    options.WalkSpeed = v;
+    game:GetService("Players").LocalPlayer.Character.Humanoid.WalkSpeed = v
+end)
+AF:AddSlider("JumpPower", 50, 500, 50, function(v)
+    options.WalkSpeed = v;
+    game:GetService("Players").LocalPlayer.Character.Humanoid.JumpPower = v
+end)
+
 --[[
 local PTAB = library:AddWindow("Player",7992557358)
 PTAB:AddBlank()
